@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <button @click="message += 1" @dblclick="message=0">累加器</button>
+    <p>这里显示一共按了几次button{{message}}</p>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: 0
+        }
+    });
+</script>
+<div id="app4">
+    <button @click="say('你好')">你好！</button>
+    <button @click="say('hello world')">hello world!</button>
+</div>
+<script>
+    let vm3 = new Vue({
+        el: "#app4",
+        methods: {
+            say: function (message) {
+                alert(message)
+            }
+        }
+    })
+</script>
+<div id="app2">
+    <button @click="runSometings">
+        做一些事情
+    </button>
+</div>
+<script>
+    let vm1 = new Vue({
+        el: "#app2",
+        data: {
+            name: "vue.js"
+        },
+        methods: {
+            runSometings: function (event) {
+                alert('hello' + this.name)
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            }
+        }
+    })
+</script>
+<hr>
+<div id="app5">
+    <div>
+        <input type="password" v-model="messageOne" placeholder="在这里输入：">
+        <p>这里会显示输出了什么{{messageOne}}</p>
+        <p>这里又会显示输出了什么{{messageTwo}}</p>
+        <textarea v-model ="messageTwo"></textarea>
+
+    </div>
+
+</div>
+<div id='example-3'>
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+</div>
+<script>
+    var vm9 = new Vue({
+        el:"#app5",
+        data:{
+            messageOne:'',
+            messageTwo:''
+        }
+    })
+    var vm8 = new Vue({
+        el: '#example-3',
+        data: {
+            checkedNames: []
+        }
+    })
+</script>
+
+<div id="app6">
+    <input type="radio" id="one"  value="one" v-model="pickedOne">one
+    <input type="radio" id="two" value="two" v-model="pickedOne">two
+    <input type="radio" id="three" value="three" v-model="pickedOne">three
+    <p>选择{{ pickedOne }}</p>
+</div>
+<script>
+
+    let vm6 = new Vue({
+        el:"#app6",
+        data:{
+            pickedOne:''
+        }
+    })
+</script>
+
+<div id="app8" >
+    <select v-model="selected">
+        <option disabled value=""></option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+        <option>D</option>
+    </select>
+    <p>selected:{{selected}}</p>
+</div>
+<script>
+    new Vue({
+        el:'#app8',
+        data:{
+            selected:''
+        }
+    })
+</script>
+
+</body>
+</html>

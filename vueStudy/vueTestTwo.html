@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <!--v-once,只能用一次-->
+    <div v-once>使用v-once,保证是第一个: {{messageOne}}</div>
+    <!--原始HTML-->
+    <div v-html="messageTwo">2.输出P标签：</div>
+    <!--HTML的特性需要v-bind绑定-->
+    <div v-bind:class="messageThree">HTML的特性</div>
+
+    <!--JS表达式-->
+    <div>{{messageFour ? '大于0' : '小于0'}}</div>
+    <div>hello world! {{messageFive.split('').reverse().join('')}}</div>
+    <div v-if="messageSix">决定我是否显示</div>
+    <a v-bind:href="messageSeven">baidu</a>
+    <div @click = 'messageEight'>
+        <div v-on:click.stop = "messageNine">
+                点击我
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var appOne = new Vue({
+        el: '#app',
+        data: {
+            messageOne: '第一',
+            messageTwo: "<p style='color: green;'>这是加入的P标签,原标签里内容不显示</p>",
+            messageThree: "redCss",
+            messageFour: 1,
+            messageFive:'hello world!',
+            messageSix:true,
+            messageSeven:"https://www.baidu.com",
+        },
+        methods:{
+            messageEight:function(){
+                console.log('外部嵌套的点击')
+            },
+            messageNine:function(){
+                console.log('内部嵌套的点击')
+            }
+        },
+    });
+    appOne.$data.messageOne = '我要变更不是第一';
+
+
+</script>
+<style type="text/css">
+    .redCss {
+        color: red;
+        font-size: 30px;
+    }
+</style>
+
+<hr/>
+<!--计算属性-->
+<div id="appTwo">
+    <p>
+        初始语言是：{{oneMessage}}
+    </p>
+    <p>转换后的语言是：{{twoMessage}}</p>
+</div>
+<div id="demo">{{ fullName }}</div>
+<script type="text/javascript">
+    var app2 = new Vue({
+        el: "#appTwo",
+        data:{
+            oneMessage:"中国好",
+        },
+        computed:{
+            twoMessage:function(){
+                return this.oneMessage.split('').reverse().join('')
+            }
+        }
+    });
+    app2.$data.oneMessage = '颠倒测试';
+    var vm = new Vue({
+        el: '#demo',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
+        },
+        watch: {
+            firstName: function (val) {
+                console.log("Test1")
+            },
+            lastName: function (val) {
+                console.log("Test2")
+            }
+        }
+    })
+</script>
+
+<div id="watch-example">
+    <p>
+        Ask a yes/no question:
+        <input v-model="question">
+    </p>
+    <p>{{ answer }}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script>
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data: {
+            question: '',
+            answer: 'I cannot give you an answer until you ask a question!'
+        },
+        watch: {
+            // 如果 `question` 发生改变，这个函数就会运行
+            question: function (newQuestion, oldQuestion) {
+                this.answer = 'Waiting for you to stop typing...'
+                this.getAnswer()
+            }
+        },
+        methods: {
+            getAnswer: function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = 'Questions usually contain a question mark. ;-)'
+                    return
+                }
+                this.answer = 'Thinking...'
+                var vm = this
+                axios.get('https://yesno.wtf/api')
+                    .then(function (response) {
+                        vm.answer = response.data.answer
+                    })
+            }
+        }
+    })
+</script>
+</body>
+</html>

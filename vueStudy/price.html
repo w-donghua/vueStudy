@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{fullName}}
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                firstName:'Tom',
+                lastName:'Jack',
+            },
+            computed:{
+                fullName:{
+                    get:function(){
+                        return this.firstName + ' get ' + this.lastName;
+                    },
+                    set:function(newValue){
+                        var names = newValue.split(" ");
+                        this.firstName = names[0];
+                        this.lastName = names[names.length - 1];
+                    }
+                }
+            },
+
+        })
+    </script>
+    <div id="app3">
+        computed:{{message}} methods:{{messageTwo()}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app3",
+            computed:{
+                message:function(){
+                    return Date();
+                }
+            },
+            methods:{
+                messageTwo:function(){
+                    return Date();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

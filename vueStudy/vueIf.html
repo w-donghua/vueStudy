@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="type === 1">
+        A选择
+    </div>
+    <div v-else-if="type === 2">
+        BB选择
+    </div>
+    <div v-else="type === 3">
+        CC选择
+    </div>
+    <div v-show="ok">v-show</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            type: 3,
+            ok:true
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用computed属性</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        {{messageOne}} {{nameOne()}}
+    </div>
+    <script>
+        var app1 = new Vue({
+            el:"#app1",
+            data:{
+
+                packageOne:[
+                    {
+                      name: 'iphone6plus',
+                      price: 7000,
+                      count: 2
+                    },
+                    {
+                      name:'ipad',
+                      price:4000,
+                      count:3
+                    }
+                ],
+                packageTwo:[
+                    {
+                        name:'apple',
+                        price:3,
+                        count:5
+                    },
+                    {
+                        name:'banana',
+                        price:2,
+                        count:2
+                    }
+                ],
+            },
+            methods:{
+              nameOne:function(){
+                  return this.packageOne[1].name
+              }
+            },
+            computed:{
+                messageOne:function(){
+                    var prices = 0;
+                    for(let i = 0; i < this.packageOne.length; i++){
+                        prices += this.packageOne[i].price * this.packageOne[i].count;
+                    }
+                    for(let i = 0; i<this.packageTwo.length;i++){
+                        prices += this.packageTwo[i].price * this.packageTwo[i].count;
+                    }
+                    return prices;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

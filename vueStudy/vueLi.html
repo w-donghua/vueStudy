@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<!--    <ul id="example-1">-->
+<!--        <li v-for="(item,index) in items">-->
+<!--            {{index}} {{item.message}}-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--<ul id="example-1">-->
+<!--    <li v-for="(item in items">-->
+<!--        {{item}}-->
+<!--    </li>-->
+<!--</ul>-->
+<!--    <script>-->
+<!--        // var example1 = new Vue({-->
+<!--        //     el:'#example-1',-->
+<!--        //     data:{-->
+<!--        //         items:[-->
+<!--        //             {message:'wang'},-->
+<!--        //             {message: "dong"}-->
+<!--        //         ]-->
+<!--        //     }-->
+<!--        // });-->
+
+
+<!--        var vm = new Vue({-->
+<!--            el:"#example-1",-->
+<!--            data: {-->
+<!--                items: ['a', 'b', 'c']-->
+<!--            }-->
+<!--        })-->
+<!--       vm.$set(example1.items, indexOfItem, newValue);-->
+<!--    </script>-->
+
+<!--    <ul id="v-forObject" class="demo">-->
+<!--        <li v-for="what,fuck in object" :key="what">-->
+<!--            {{fuck}} {{what}}-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--    <script>-->
+<!--        var vm = new Vue({-->
+<!--            el:'#v-forObject',-->
+<!--            data:{-->
+<!--                object:{-->
+<!--                    title:'how to',-->
+<!--                    author: 'wang',-->
+<!--                    pub: '2019',-->
+<!--                    sex:'man'-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+
+<!--    </script>-->
+<div>
+    <ul id="app3">
+        <li v-for="num in even(numbers)">{{num}}</li>
+    </ul>
+
+</div>
+<script>
+    var vm = new Vue({
+        el:'#app3',
+        data:{
+            numbers:[32,2,8,4,6,6,96]
+        },
+        methods:{
+            even: function(numbers){
+                return numbers.filter(function (number){
+                    return number %2 === 0
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>

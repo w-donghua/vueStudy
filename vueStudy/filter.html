@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>尝试使用filter过滤器</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        {{data | filterDate}}
+    </div>
+    <script>
+        var padDate = function(value){
+            return value < 10 ? '0' + value : value;
+        };
+        let vm1 = new Vue({
+            el:"#app1",
+            data:{
+                data: new Date()
+            },
+            filters:{
+                filterDate:function (value) {
+                    var date = new Date(value);
+                    let year = date.getFullYear();
+                    let month = padDate(date.getMonth() + 1);
+                    let day = padDate(date.getDate());
+                    let hours = padDate(date.getHours());
+                    let minutes = padDate(date.getMinutes());
+                    let seconds = padDate(date.getSeconds());
+                    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+                }
+            },
+            mounted: function(){
+                var _this = this;
+                this.timer = setInterval(function(){
+                    _this.date = new Date();
+                },1000);
+            },
+            beforeDestroy:function(){
+                if(this.timer){
+                    clearInterval(this.timer);
+                }
+            }
+        })
+    </script>
+    <div id="app">
+        <a v-bind:href="urlA">链接</a>
+        <br>
+        <img v-bind:src="urlImg" v-if="choose">
+        <button @click="clickOn">点击{{message}}图片</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                message:'隐藏',
+                choose:true,
+                urlA:'https://www.baidu.com',
+                urlImg:"http://img01.tooopen.com/Downs/images/2009/11/3/sy_20091103101617081018.jpg"
+            },
+            methods:{
+                clickOn:function(){
+                   this.choose = !(this.choose);
+                   this.message= '显示';
+                }
+            }
+        })
+    </script>
+</body>
+</html>

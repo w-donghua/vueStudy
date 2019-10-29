@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message" placeholder="请输入....">
+    <p>{{message}}</p>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            message:'',
+        }
+    })
+</script>
+
+<div id="app1">
+    <input type="checkbox" v-model="checked" value="html" id="html">
+    <label for="html">Html</label>
+    <input type="checkbox" v-model="checked" value="css" id="css">
+    <label for="css">css</label>
+    <input type="checkbox" v-model="checked" value="javascript" id="javascript">
+    <label for="javascript">javascript</label>
+    <br>
+    <p>选则：{{checked}}</p>
+</div>
+<script>
+    var vm = new Vue({
+        el:"#app1",
+        data:{
+            checked:[]
+        }
+    })
+</script>
+
+<div id="app3">
+    <select v-model="selected" multiple>
+        <option>CSS</option>
+        <option value="JS">JAVASCRIPT</option>
+        <option>HTML</option>
+    </select>
+    <p>选择是：{{selected}}</p>
+</div>
+<script>
+    var vm3 = new Vue({
+        el:"#app3",
+        data:{
+            selected:[]
+        }
+    })
+</script>
+
+<div id="app4">
+    <input type="checkbox"
+            v-model="toggle"
+            :true-value ="value1"
+            :false-value="value2">
+    <label>复选框</label>
+    <p>{{toggle}}</p>
+    <p>{{value1}}</p>
+    <p>{{value2}}</p>
+</div>
+<script>
+    var vm4 = new Vue({
+        el:"#app4",
+        data:{
+            toggle:false,
+            value1:'a',
+            value2:'b'
+        }
+    })
+</script>
+</body>
+</html>

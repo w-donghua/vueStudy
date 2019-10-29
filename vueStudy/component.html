@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="components-demo">
+    <button-counter title="title1" @clicknow="clicknow">212</button-counter>
+</div>
+<script>
+    Vue.component('button-counter',{
+        data: function(){
+            props:['title'],
+            data:function(){
+            return{
+                count:0
+            }
+        },
+        template: "<button @click='clickfun'>you clicked me{{count}} times</button>",
+        methods:{
+            clickfun: function(){
+                this.count++;
+                this.$emit('clicknow',this.count);
+            }
+        }
+    });
+
+    new Vue({
+        el:'#components-demo',
+        data:{},
+        methods:{
+            clicknow:function(e){
+                colsole.log(e)
+            }
+        }
+    });
+</script>
+</body>
+</html>
