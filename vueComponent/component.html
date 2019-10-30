@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <script>
+        Vue.component('my-component',{
+            template:'<div>shuchu</div>'
+        });
+        var vm = new Vue({
+            el:"#app",
+            data:{
+
+            }
+        });
+    </script>
+
+<div id="app2">
+    <my-componentsone></my-componentsone>
+</div>
+<script>
+    var child={
+        template:'<div>局部注册</div>'
+    };
+    var app = new Vue({
+        el:"#app2",
+        components:{
+            "my-componentsone":child
+        }
+    })
+</script>
+
+
+<div id="app3">
+    <my-componenttwo></my-componenttwo>
+    <my-componenttwo></my-componenttwo>
+    <my-componenttwo></my-componenttwo>
+</div>
+    <script>
+        var data={counter:0};
+
+        Vue.component('my-componenttwo',{
+            template:'<button @click="counter++">{{counter}}</button>',
+            data:function(){
+                return data;
+            }
+        });
+        var app = new Vue({el:'#app3'})
+    </script>
+</body>
+</html>

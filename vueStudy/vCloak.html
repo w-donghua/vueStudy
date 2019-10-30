@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>cloak在结束编译时从绑定的HTML元素移除</title>
+
     <script src="vue.js"></script>
 </head>
 <body>
 <div id="app" v-cloak>
     {{message}}
 </div>
+
 <script>
     var app = new Vue({
         el:"#app",

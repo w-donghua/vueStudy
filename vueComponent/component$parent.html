@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        {{message}}
+        <component-a></component-a>
+    </div>
+    <script>
+        Vue.component('component-a',{
+            template:'<button @click="handleClick">通过父链传递</button>',
+            methods:{
+                handleClick:function(){
+                    this.$parent.message = '来自组件component-a的内容';
+                }
+            }
+        });
+        var app = new Vue({
+            el:"#app1",
+            data:{
+                message:'',
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单项数据流</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <my-componentone :initcount="1"></my-componentone>
+    </div>
+    <script>
+        Vue.component('my-componentone',{
+            props:['initcount'],
+            template:'<div>{{count}}</div>',
+            data:function(){
+                return{
+                    count: this.initcount
+                }
+            }
+        });
+        var app = new Vue({
+            el:"#app1"
+        })
+    </script>
+</body>
+</html>

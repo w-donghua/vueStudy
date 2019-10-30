@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--父组件的内容在父组件作用域内编译，子组件末班的内容是在子组件作用域内编译-->
+<!--这里的showChild绑定的是父组件的数据。div是父组件-->
+    <div id="app1">
+        <child-component v-show="showChild"></child-component>
+    </div>
+    <script>
+        Vue.component('child-component',{
+            template:'<div>子组件</div>'
+        });
+        let vm = new Vue({
+            el:"#app1",
+            data:{
+                showChild:true
+            }
+        });
+    </script>
+
+<!--在子组件上绑定-->
+<div id="app2">
+    <child-component></child-component>
+</div>
+<script>
+    Vue.component('child-component',{
+        template: '<div v-show="showChildren">由子组件在自己的作用域操作数据</div>',
+        data:function(){
+            return{
+                showChildren:true
+            }
+        }
+    });
+    var app = new Vue({
+        el:"#app2"
+    })
+</script>
+</body>
+</html>

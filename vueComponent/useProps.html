@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习props</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component message="这个需要渲染"></my-component>
+    </div>
+    <script>
+        Vue.component('my-component',{
+            props:['message'],
+            template:'<div>{{message}}</div>'
+        });
+        var vm = new Vue({
+            el:'#app'
+        })
+
+    </script>
+
+<div id="app2">
+    <input type="text" v-model="parentMessage">
+    <my-component v-bind:message="parentMessage"></my-component>
+</div>
+    <script>
+        Vue.component('my-component',{
+            props: ['message'],
+            template: '<div>{{message}}</div>'
+        });
+        var vm2 = new Vue({
+            el:"#app2",
+            data:{
+                parentMessage:''
+            }
+        })
+    </script>
+
+
+<div id="app3">
+    <my-componentthree message="[1,2,5]"></my-componentthree>
+    <my-componentthree :message="[1]"></my-componentthree>
+</div>
+<script>
+    Vue.component('my-componentthree',{
+        props:['message'],
+        template:"<div>{{message.length}}</div>"
+    });
+    var vm4 = new Vue({
+        el:"#app3",
+    })
+</script>
+</body>
+</html>
