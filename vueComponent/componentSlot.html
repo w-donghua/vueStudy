@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <child-component v-show="shownone">
+            <p>第一行</p>
+            <p>第二行</p>
+        </child-component>
+    </div>
+    <script>
+        Vue.component('child-component',{
+            template:'<div>' +
+                '<slot>' +
+                '<p>这是slot里的字。看如何能显示</p>' +
+                '</slot>' +
+                '</div>'
+        })
+        let vm = new Vue({
+            el:'#app1',
+            data:{
+                shownone:true,
+            }
+        })
+    </script>
+</body>
+</html>

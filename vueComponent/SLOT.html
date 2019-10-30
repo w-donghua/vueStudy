@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习slot</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!--父组件需要在子组件内放一些DOM，那么DOM在哪里显示，怎么显示，就是slot分发的工作-->
+<!--1.正常情况下不显示-->
+<div id="app1">
+    <children-one>
+        <div>这段内容不显示</div>
+    </children-one>
+</div>
+<script>
+    Vue.component('childrenOne',{
+        template:'<button>button是为了明白作用范围</button>'
+    });
+    var vm1 = new Vue({
+        el:"#app1",
+
+    })
+</script>
+<!--2.单个slot-->
+<div id="app2">
+    <children-two>
+        <span>这是html子组件的 </span>
+    </children-two>
+</div>
+<script>
+    Vue.component('childrenTwo',{
+        template: '<button><slot></slot>明确范围使用</button>'
+    });
+    var vm2 = new Vue({
+        el:"#app2"
+    })
+        //输出结果，即父组件放在子组件的内容被放在了子组件的插件这里
+        // <button><span>12345</span>明确范围使用</button>
+</script>
+
+<!--3.多个slot 具名slot
+将放在子组件里的不同HTML标签放在不同的位置 父组件在要分发的标签里添加 slot=”name名” 属性
+子组件在对应分发的位置的slot标签里，添加name=”name名” 属性，-->
+<div id="app3">
+    <children-four>
+        <span slot="firstOne">这是第一个会显示 </span>
+        <span slot="second">这是第二个也会显示</span>
+    </children-four>
+</div>
+<script>
+    Vue.component('childrenFour',{
+        template:'<button>' +
+            '<slot name="firstOne"></slot>' +
+            ' 我是button里的数据 ' +
+            '<slot name="second"></slot>' +
+            '</button>'
+    });
+    let vm3 = new Vue({
+        el:"#app3"
+    })
+    //输出结果：
+    //     <button>
+    //     <span slot="first">这是第一个会显示 </span>
+    // 我是button里的数据，
+    // <span slot="second">这是第二个也会显示</span>
+    // </button>
+</script>
+<!--4.分发内容的作用域被分发的内容的作用域，根据其所在模板决定，例如，以上标签，
+其在父组件的模板中（虽然其被子组件的children标签所包括，但由于他不在子组件的template属性中，因此不属于子组件），则受父组件所控制。-->
+<div id="app4">
+    <children-five>
+        <span slot="firstOneOne" @click="breakOut">点击我这几个字有提示</span>
+        <span slot="secondTwo">点击我没反应</span>
+    </children-five>
+</div>
+<script>
+    Vue.component('childrenFive',{
+        template:'<button><slot name="firstOneOne"></slot>为了明确范围：<slot name="secondTwo"></slot></button>'
+    });
+    let vm4 = new Vue({
+        el:"#app4",
+        methods:{
+            breakOut:function(){
+                console.log('tanchu');
+            }
+            }
+        });
+</script>
+<!--5.作用域插槽-->
+<div id="app5">
+    <children-five>
+        <template scope="props">
+            <p>来自父组件的内容</p>
+            <p>{{props.msg}}</p>
+        </template>
+    </children-five>
+
+</div>
+<script>
+    Vue.component('childrenFive',{
+        template:'' +
+            '<div class="container">' +
+            '<slot msg="来自组件的内容"></slot>' +
+            '</div>'
+    });
+    var vm5 = new Vue({
+        el:"#app5"
+    })
+</script>
+</body>
+</html>
