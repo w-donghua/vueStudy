@@ -87,12 +87,12 @@
             }
         });
 </script>
-<!--5.作用域插槽-->
+<!--5.作用域插槽 template通过scope的临时变量props来访问子组件的插槽数据-->
 <div id="app5">
     <children-five>
-        <template scope="props">
+        <template scope="propsl">
             <p>来自父组件的内容</p>
-            <p>{{props.msg}}</p>
+            <p>{{propsl.msgss}}</p>
         </template>
     </children-five>
 
@@ -101,7 +101,7 @@
     Vue.component('childrenFive',{
         template:'' +
             '<div class="container">' +
-            '<slot msg="来自组件的内容"></slot>' +
+            '<slot msgss="来自组件的内容"></slot>' +
             '</div>'
     });
     var vm5 = new Vue({
