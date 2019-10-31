@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <my-component></my-component>
+    <script type="text/x-template" id="my-component">
+        <a href="http://www.baidu.com">abc</a>
+    </script>
+</div>
+<script>
+    Vue.component('my-component',{
+        template:'#my-component'
+    });
+
+    var app= new Vue({
+        el:"#app1"
+    })
+</script>
+</body>
+</html>
